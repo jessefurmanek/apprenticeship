@@ -1,0 +1,42 @@
+# First Two Weeks
+
+_Tasks_
+1. Build command line flashcards app with spaced repetition and reminders 
+  * Build in Ruby 
+  * Use JSON as the backend 
+2. Push project to private Git repo
+3. Extend into a Sinatra web app to accept requests
+4. Extend to CL app to use sqlite
+5. Pair on something with someone
+
+_Knowledge_
+1. Relational Databases
+    * What is a relational database?
+    * What does it do for you?
+    * How is data organized in a RDB?
+    * Know some basic SQL to make Active Record less magical.
+    * What is Active Record?
+    * What is a "model"?
+    * What does it do for you?
+2. Sinatra
+    * What is Sinatra and what does it do for you?
+3. Learn Vim see if that's the environment for you
+4. Basic TC architecture and workflow
+    * What are services?
+    * What are APIs?
+    * How do services and APIs interact?
+    * How does code get deployed?
+
+# Second Two Weeks
+
+_Tasks_
+1. Complete some small stories
+2. Get a local environment/Docker set up.  Be able to shop a trunk locally. 
+3. Finish Deploying Rails
+
+_Knowledge_
+1. General idea of the TC business
+    * What are the major teams?
+    * Talk with each of the PMs.
+    * What problems do the various teams face?  
+2. Basic Jira usage
