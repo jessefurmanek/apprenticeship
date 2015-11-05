@@ -1,7 +1,6 @@
 require 'json'
 require_relative "user.rb"
-require_relative "card.rb"
-require_relative "deck.rb"
+require_relative "deck_actions.rb"
 
 JSON_FILE = 'flashcards.json'
 
@@ -41,5 +40,5 @@ end
 database = get_json_data
 
 user = select_user(database)
-puts database
 menu(user, database)
+puts database

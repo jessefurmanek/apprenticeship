@@ -5,9 +5,7 @@ def display_user(database)
   		users<<k
   	end
   end
-
   users << "<new user>"
-
 	users.each_with_index do |user, i|
 		puts (i+1).to_s+") "+user
 	end
