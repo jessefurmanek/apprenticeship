@@ -10,10 +10,16 @@ def get_json_data
 	return json_hash
 end
 
+def update_database(database)
+	File.open(JSON_FILE,"w") do |f|
+		f.write(database.to_json)
+	end
+end
+
 def menu(user, database)
 	puts
   puts "What do you want to do?"
-	menu_options = ["Create Deck", "Edit Deck", "Play Deck", "Quit"]
+	menu_options = ["Create Deck", "Edit/Delete a Deck", "Play Deck","Quit"]
 	menu_options.each_with_index do |option, i|
 		puts (i+1).to_s+") "+option
 	end
@@ -25,7 +31,7 @@ def menu(user, database)
 	when 1
 		create_deck(user, database)
 	when 2
-		edit_deck(user,database)
+		display_edit_menu(user,database)
 	when 3
 		play_deck(user,database)
 	when 4
@@ -41,4 +47,3 @@ database = get_json_data
 
 user = select_user(database)
 menu(user, database)
-puts database

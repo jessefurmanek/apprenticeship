@@ -18,7 +18,7 @@ def create_user(users,database)
 	puts "what is your name?"
 	user_name = gets.chomp
 	user_id = user_name.upcase
-	user = {"name"=>"#{user_name}", "decks"=>{}}
+	user = {"name"=>"#{user_name}", "deck_names"=>[]}
 
 	if !database["users"]["#{user_id}"]
 		database["users"]["#{user_id}"] = user
