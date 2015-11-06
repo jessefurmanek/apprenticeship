@@ -1,12 +1,12 @@
 require_relative "card_actions.rb"
+
 def get_deck_name(user, deck, database)
-  puts user
-  puts deck
   return database['users'][user]["deck_names"][deck]
 end
 
 def show_decks(user,database)
-  if database['users'][user]['deck_names']
+  system "clear" or system "cls"
+  if database['users'][user]['deck_names']!=[]
     database['users'][user]['deck_names'].each_with_index do |deck, i|
       puts (i+1).to_s+") "+deck
     end
@@ -17,6 +17,7 @@ def show_decks(user,database)
 end
 
 def display_edit_menu(user,database)
+  system "clear" or system "cls"
   puts "Select a deck:"
   if show_decks(user,database)
     puts
@@ -46,12 +47,13 @@ def display_edit_menu(user,database)
 end
 
 def edit_deck(user,deck, database)
+  system "clear" or system "cls"
   puts database["user_decks"][database['users'][user]["deck_names"][deck]]
   card_edit_menu(user, deck, database)
-
 end
 
 def create_deck(user, database)
+  system "clear" or system "cls"
   puts "What is the name of your deck?"
   puts
   print "Enter name: "
@@ -61,11 +63,12 @@ def create_deck(user, database)
   deck['user'] = user
   deck['cards'] = {}
   deck['json_index'] = "#{deck["name"].upcase}_#{deck["user"].upcase}".tr(' ', '_')
+
   if !database["user_decks"][deck["json_index"]]
     database["user_decks"][deck["json_index"]] = deck
-    database["users"][user]["decks"] = {deck['json_index']=>true}
+    database["users"][user]["deck_names"]<<deck['json_index']
     update_database(database)
-    edit_deck(user, database)
+    edit_deck(user,database["users"][user]["deck_names"].length-1, database)
   else
     puts "Deck name already exists! Choose another name."
     create_deck(user, database)
@@ -77,7 +80,10 @@ def delete_deck(user,deck, database)
   print "Y/N: "
   answer = gets.chomp
   if ["Y", "YES"].include?(answer.upcase)
+    #delete deck from user object
     database['users'][user]['deck_names'].delete_at(deck)
+    #delete deck from user_decks obejct
+    database["user_decks"].delete(get_deck_name(user, deck, database))
     update_database(database)
   end
   menu(user, database)

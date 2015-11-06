@@ -1,7 +1,10 @@
+require_relative "card_helper.rb"
+
 def card_edit_menu(user, deck, database)
+  system "clear" or system "cls"
   puts "What do you want to do?"
   puts
-  menu_options = ["Add Card", "Edit Card", "Delete Card", "View Card", "Go to Menu"]
+  menu_options = ["Add Card", "Edit Card", "Delete Card", "View Cards", "Go to Menu"]
 	menu_options.each_with_index do |option, i|
 		puts (i+1).to_s+") "+option
 	end
@@ -17,7 +20,7 @@ def card_edit_menu(user, deck, database)
   when 3
     delete_card(user, deck, database)
   when 4
-    view_card(user, deck, database)
+    view_cards(user, deck, database)
   when 5
     menu(user, database)
   else
@@ -26,16 +29,18 @@ def card_edit_menu(user, deck, database)
   end
 end
 
-
-def show_cards(deck,user,database)
-  database[user_decks][deck]['cards'].each_key do |card|
-    puts card
-	end
+def cards_to_array(user,deck,database)
+  system "clear" or system "cls"
+  cards_as_array = []
+  database["user_decks"][get_deck_name(user,deck,database)]['cards'].each_key do |card|
+    cards_as_array<<card
+  end
+  cards_as_array
 end
 
 
-
 def add_card(user, deck, database)
+  system "clear" or system "cls"
   while true
     puts
     puts "What should this card be called?"
@@ -72,6 +77,7 @@ def add_card(user, deck, database)
 
   if ["Y", "YES"].include?(user_input.upcase)
     deck_name = get_deck_name(user, deck, database)
+
     database['user_decks'][deck_name]['cards'][name] = card
   end
 
@@ -79,18 +85,22 @@ def add_card(user, deck, database)
   edit_deck(user, deck, database)
 end
 
+
 def edit_card(user, deck, database)
-  puts "Which card do you want to edit?"
-  show_cards(user, deck, database)
-
-
+  system "clear" or system "cls"
+  card = select_a_card(user,deck,database, "edit")
 end
 
 def delete_card(user, deck, database)
-  deck['cards'].each_key do |card|
-    puts (i+1).to_s+") "+deck['cards'][card]['name']
-	end
+  system "clear" or system "cls"
+  card = select_a_card(user,deck,database, "edit")
 end
 
-def view_card(user, deck, database)
+def view_cards(user, deck, database)
+  system "clear" or system "cls"
+  if show_cards(user, deck, database)
+   "foo"
+  else
+    card_edit_menu(user,deck,database)
+  end
 end

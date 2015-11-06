@@ -17,6 +17,7 @@ def update_database(database)
 end
 
 def menu(user, database)
+	system "clear" or system "cls"
 	puts
   puts "What do you want to do?"
 	menu_options = ["Create Deck", "Edit/Delete a Deck", "Play Deck","Quit"]
