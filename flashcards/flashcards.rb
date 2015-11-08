@@ -1,6 +1,7 @@
 require 'json'
 require_relative "user.rb"
 require_relative "deck_actions.rb"
+require_relative "upload.rb"
 
 JSON_FILE = 'flashcards.json'
 
@@ -20,7 +21,7 @@ def menu(user, database)
 	system "clear" or system "cls"
 	puts
   puts "What do you want to do?"
-	menu_options = ["Create Deck", "Edit/Delete a Deck", "Play Deck","Quit"]
+	menu_options = ["Create a Deck", "Edit/Delete a Deck", "Play Deck","Quit"]
 	menu_options.each_with_index do |option, i|
 		puts (i+1).to_s+") "+option
 	end

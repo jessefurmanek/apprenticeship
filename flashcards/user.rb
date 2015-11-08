@@ -34,7 +34,6 @@ def create_user(users,database)
 end
 
 def select_user(database)
-	puts
 	puts "Select a user:"
 	users = display_user(database)
 	print "Enter selection: "

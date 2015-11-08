@@ -1,7 +1,6 @@
 require_relative "card_helper.rb"
 
 def card_edit_menu(user, deck, database)
-  system "clear" or system "cls"
   puts "What do you want to do?"
   puts
   menu_options = ["Add Card", "Edit Card", "Delete Card", "View Cards", "Go to Menu"]
@@ -27,15 +26,6 @@ def card_edit_menu(user, deck, database)
     puts "Invalid Entry! Try again."
     card_edit_menu(deck,user, database)
   end
-end
-
-def cards_to_array(user,deck,database)
-  system "clear" or system "cls"
-  cards_as_array = []
-  database["user_decks"][get_deck_name(user,deck,database)]['cards'].each_key do |card|
-    cards_as_array<<card
-  end
-  cards_as_array
 end
 
 
@@ -99,8 +89,6 @@ end
 def view_cards(user, deck, database)
   system "clear" or system "cls"
   if show_cards(user, deck, database)
-   "foo"
-  else
     card_edit_menu(user,deck,database)
   end
 end

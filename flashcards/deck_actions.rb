@@ -4,6 +4,11 @@ def get_deck_name(user, deck, database)
   return database['users'][user]["deck_names"][deck]
 end
 
+def create_deck_json_index(user,deck,database)
+  puts deck
+  "#{deck["name"].upcase}_#{user.upcase}".tr(' ', '_')
+end
+
 def show_decks(user,database)
   system "clear" or system "cls"
   if database['users'][user]['deck_names']!=[]
@@ -62,13 +67,20 @@ def create_deck(user, database)
   deck['name'] = deck_name
   deck['user'] = user
   deck['cards'] = {}
-  deck['json_index'] = "#{deck["name"].upcase}_#{deck["user"].upcase}".tr(' ', '_')
+  deck['json_index'] = create_deck_json_index(user, deck, database)
 
   if !database["user_decks"][deck["json_index"]]
-    database["user_decks"][deck["json_index"]] = deck
-    database["users"][user]["deck_names"]<<deck['json_index']
-    update_database(database)
-    edit_deck(user,database["users"][user]["deck_names"].length-1, database)
+    puts "Create manually or upload deck?"
+    print "M/U?"
+    answer = gets.chomp
+    if ["M", "MANUALLY"].include?(answer.upcase)
+      database["user_decks"][deck["json_index"]] = deck
+      database["users"][user]["deck_names"]<<deck['json_index']
+      update_database(database)
+      edit_deck(user,database["users"][user]["deck_names"].length-1, database)
+    else["U", "UPLOAD"].include?(answer.upcase)
+      upload_deck(user, deck, database)
+    end
   else
     puts "Deck name already exists! Choose another name."
     create_deck(user, database)

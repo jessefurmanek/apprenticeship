@@ -1,1 +1,123 @@
-{"users":{"JESSE":{"name":"jesse","deck_names":["DECK_DEUX_JESSE","DECK_TWO_JESSE"]},"VINCENT":{"name":"Vincent","deck_names":["A_DECK_FOR_VINCENT_VINCENT"]},"ELLIOT":{"name":"Elliot","deck_names":["ELLIOT'S_DECK_ELLIOT"]}},"user_decks":{"DECK_DEUX_JESSE":{"name":"Deck Deux","user":"JESSE","cards":{"First card ":{"name":"First card ","front":"Front","back":"Back"}},"json_index":"DECK_DEUX_JESSE"},"A_DECK_FOR_VINCENT_VINCENT":{"name":"A deck for vincent","user":"VINCENT","cards":{"First Card":{"name":"First Card","front":"Front first","back":"Back next"},"Second Card":{"name":"Second Card","front":"Second front","back":"Never back down"}},"json_index":"A_DECK_FOR_VINCENT_VINCENT"},"ELLIOT'S_DECK_ELLIOT":{"name":"Elliot's Deck","user":"ELLIOT","cards":{"Elliot's Card":{"name":"Elliot's Card","front":"front of card","back":"back of card"}},"json_index":"ELLIOT'S_DECK_ELLIOT"},"JESSE'S_SECOND_DECK_JESSE":{"name":"Jesse's Second Deck","user":"JESSE","cards":{"Card":{"name":"Card","front":"Card card front","back":"adfadefas"}},"json_index":"JESSE'S_SECOND_DECK_JESSE"},"DECK_TWO_JESSE":{"name":"Deck Two","user":"JESSE","cards":{"Deck two first card":{"name":"Deck two first card","front":"D2 F","back":"d2 Bbaaaacckk"},"Deck two card 2":{"name":"Deck two card 2","front":"The next event in the card trilogy...","back":"Back"}},"json_index":"DECK_TWO_JESSE"}}}
+{
+  "users": {
+    "JESSE": {
+      "name": "jesse",
+      "deck_names": [
+        "DECK_DEUX_JESSE",
+        "DECK_TWO_JESSE"
+      ]
+    },
+    "VINCENT": {
+      "name": "Vincent",
+      "deck_names": [
+        "A_DECK_FOR_VINCENT_VINCENT"
+      ]
+    },
+    "ELLIOT": {
+      "name": "Elliot",
+      "deck_names": [
+        "ELLIOT'S_DECK_ELLIOT",
+        "TEST_UPLOAD_ELLIOT"
+      ]
+    }
+  },
+  "user_decks": {
+    "DECK_DEUX_JESSE": {
+      "name": "Deck Deux",
+      "user": "JESSE",
+      "cards": {
+        "First card ": {
+          "name": "First card ",
+          "front": "Front",
+          "back": "Back"
+        }
+      },
+      "json_index": "DECK_DEUX_JESSE"
+    },
+    "A_DECK_FOR_VINCENT_VINCENT": {
+      "name": "A deck for vincent",
+      "user": "VINCENT",
+      "cards": {
+        "First Card": {
+          "name": "First Card",
+          "front": "Front first",
+          "back": "Back next"
+        },
+        "Second Card": {
+          "name": "Second Card",
+          "front": "Second front",
+          "back": "Never back down"
+        }
+      },
+      "json_index": "A_DECK_FOR_VINCENT_VINCENT"
+    },
+    "ELLIOT'S_DECK_ELLIOT": {
+      "name": "Elliot's Deck",
+      "user": "ELLIOT",
+      "cards": {
+        "Elliot's Card": {
+          "name": "Elliot's Card",
+          "front": "front of card",
+          "back": "back of card"
+        }
+      },
+      "json_index": "ELLIOT'S_DECK_ELLIOT"
+    },
+    "JESSE'S_SECOND_DECK_JESSE": {
+      "name": "Jesse's Second Deck",
+      "user": "JESSE",
+      "cards": {
+        "Card": {
+          "name": "Card",
+          "front": "Card card front",
+          "back": "adfadefas"
+        }
+      },
+      "json_index": "JESSE'S_SECOND_DECK_JESSE"
+    },
+    "DECK_TWO_JESSE": {
+      "name": "Deck Two",
+      "user": "JESSE",
+      "cards": {
+        "Deck two first card": {
+          "name": "Deck two first card",
+          "front": "D2 F",
+          "back": "d2 Bbaaaacckk"
+        },
+        "Deck two card 2": {
+          "name": "Deck two card 2",
+          "front": "The next event in the card trilogy...",
+          "back": "Back"
+        }
+      },
+      "json_index": "DECK_TWO_JESSE"
+    },
+    "TEST_UPLOAD_ELLIOT": {
+      "Card1": {
+        "Title": "Card1",
+        "Front": "this is the front",
+        "Back": "this is the back"
+      },
+      "card2": {
+        "Title": "card2",
+        "Front": "front2",
+        "Back": "back2"
+      },
+      "card3": {
+        "Title": "card3",
+        "Front": "front3",
+        "Back": "back3"
+      },
+      "card4": {
+        "Title": "card4",
+        "Front": "front4",
+        "Back": "back4"
+      },
+      "card5": {
+        "Title": "card5",
+        "Front": "front5",
+        "Back": "back5"
+      }
+    }
+  }
+}

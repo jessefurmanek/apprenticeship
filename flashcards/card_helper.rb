@@ -1,3 +1,13 @@
+def cards_to_array(user,deck,database)
+  system "clear" or system "cls"
+  cards_as_array = []
+  database["user_decks"][get_deck_name(user,deck,database)]['cards'].each_key do |card|
+    cards_as_array<<card
+  end
+  cards_as_array
+end
+
+
 def show_cards(user,deck,database)
   system "clear" or system "cls"
   cards = cards_to_array(user, deck, database)
