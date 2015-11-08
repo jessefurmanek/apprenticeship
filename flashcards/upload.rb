@@ -11,7 +11,8 @@ def upload_deck(user,deck_index, database)
     deck = {}
     deck['name'] = get_deck_name(user, deck_index,database)
     deck['user'] = user
-    deck['json_index'] = create_deck_json_index(user,deck, database)
+    deck['json_index'] = get_deck_name(user, deck_index,database)
+    deck['cards'] = {}
     csv.each do |row|
       card = {}
       a = row.to_a
@@ -20,7 +21,7 @@ def upload_deck(user,deck_index, database)
       card[a[2][0]] = a[2][1]
       card['current_interval'] = 600 #initial interval is 10 minutes (in seconds)
       card['last_review'] = Time.now- card['current_interval']
-      deck[card['Title']] = card
+      deck['cards'][card['Title']] = card
     end
 
     database["user_decks"][deck["json_index"]] = deck
