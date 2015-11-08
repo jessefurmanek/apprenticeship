@@ -66,8 +66,9 @@ def add_card(user, deck, database)
   user_input = gets.chomp
 
   if ["Y", "YES"].include?(user_input.upcase)
+    card['current_interval'] = 600 #initial interval is 10 minutes (in seconds)
+    card['last_review'] = Time.now - card['current_interval']
     deck_name = get_deck_name(user, deck, database)
-
     database['user_decks'][deck_name]['cards'][name] = card
   end
 
@@ -83,7 +84,7 @@ end
 
 def delete_card(user, deck, database)
   system "clear" or system "cls"
-  card = select_a_card(user,deck,database, "edit")
+  card = select_a_card(user,deck,database, "delete")
 end
 
 def view_cards(user, deck, database)

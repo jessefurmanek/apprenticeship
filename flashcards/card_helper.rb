@@ -1,16 +1,16 @@
-def cards_to_array(user,deck,database)
+def cards_to_array(user,deck_index,database)
   system "clear" or system "cls"
   cards_as_array = []
-  database["user_decks"][get_deck_name(user,deck,database)]['cards'].each_key do |card|
+  database["user_decks"][get_deck_name(user,deck_index,database)]['cards'].each_key do |card|
     cards_as_array<<card
   end
   cards_as_array
 end
 
 
-def show_cards(user,deck,database)
+def show_cards(user,deck_index,database)
   system "clear" or system "cls"
-  cards = cards_to_array(user, deck, database)
+  cards = cards_to_array(user, deck_index, database)
 
   if !cards.empty?
     cards.each_with_index do |card,i|
@@ -25,10 +25,10 @@ end
 
 
 
-def select_a_card(user,deck,database,action)
+def select_a_card(user,deck_index,database,action)
   system "clear" or system "cls"
-  cards = cards_to_array(user,deck,database)
-  if show_cards(user, deck, database)
+  cards = cards_to_array(user,deck_index,database)
+  if show_cards(user, deck_index, database)
     puts "Which card do you want to #{action}?"
     print "Enter a number) "
     user_selection = gets.chomp.to_i
@@ -40,4 +40,9 @@ def select_a_card(user,deck,database,action)
   else
     return false
   end
+end
+
+def show_front(user,deck_index,database,card)
+  puts database["user_decks"]["VINNY'S_TEST_DECK_VINCENT"]
+  # puts database["user_decks"][get_deck_name(user,deck_index,database)]['cards'][card]
 end
