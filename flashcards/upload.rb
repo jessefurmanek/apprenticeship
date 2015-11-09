@@ -16,12 +16,12 @@ def upload_deck(user,deck_index, database)
     csv.each do |row|
       card = {}
       a = row.to_a
-      card[a[0][0]] = a[0][1]
-      card[a[1][0]] = a[1][1]
-      card[a[2][0]] = a[2][1]
+      card[(a[0][0]).downcase] = a[0][1]
+      card[(a[1][0]).downcase] = a[1][1]
+      card[(a[2][0]).downcase] = a[2][1]
       card['current_interval'] = 600 #initial interval is 10 minutes (in seconds)
       card['last_review'] = Time.now- card['current_interval']
-      deck['cards'][card['Title']] = card
+      deck['cards'][card['title']] = card
     end
 
     database["user_decks"][deck["json_index"]] = deck

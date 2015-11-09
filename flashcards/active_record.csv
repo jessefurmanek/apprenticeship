@@ -1,0 +1,344 @@
+title,front,back
+1,timestamp format,"YYYYMMDDHHMMSS
+
+
+
+(calendar, clock, big to small)"
+2,What does 't' refer to in the migrate Class block?,"Within the block t refers to a TableDefinition object, but we can just think of it as the table being created in the database"
+3,What is the name of the arguments passed in a migrate Class block? And what do they do?,Constraints. They keep our code clean
+4,How does a class get sweet methods to do migration (schema/table) stuff?,Inherits from ActiveRecord::Migraion
+5,Is an ID required to migrate?,"No, it's auto-incremented"
+6,What is the expression to add a timestamp inside the migration block?,"t.timestamps
+
+
+
+where t is the iterator"
+7,What are the optional columns that add additional features?,"created_at - Automatically gets set to the current date and time when the record is first created
+
+
+
+updated_at - Automatically gets set to the current date and time whenever the record is updated
+
+
+
+lock_version - Adds optimistic locking to a model
+
+
+
+type - Specifies that the model uses Single Table Inheritance
+
+
+
+(association_name)_type - Stores the type for polymorphic association
+
+
+
+(table_name)_count"
+8,How can you override an existing class' table name / column for the primary key / class name?,"self.table_name = 'new name'
+
+
+
+self.fixture_class
+
+
+
+self.primary_key = 'product key'"
+9,What's the difference between new and create,"New creates a new object
+
+
+
+Create both creates a new object and saves it to the DB"
+10,Which method to access the entire collection of that object?,all
+11,Which method to return the first of the collection?,first
+12,Which method to search the collection for the first occurrence of an attribute? Syntax?,"find_by
+
+
+
+User.find_by(name: 'tim')"
+13,Where method and its syntax,"users = User.where(name: 'David', occupation: 'Code Artist').order('created_at DESC')"
+14,Syntax to update a user's name,"user = User.find_by(name: 'tim')
+
+user.name = 'timmy'
+
+user.save
+
+
+
+or
+
+
+
+user = User.find_by(name: 'tim')
+
+user.update(name: 'timmy')"
+15,Which command to update all the matching records at once?,update_all
+16,What does ActiveRecord offer to help keep the DB clean? And what do they offer?,"Validations.
+
+
+
+They allow us to persist the db.
+
+
+
+They allow us to validate the state of a model before it gets written to the db.
+
+
+
+There are several methods that you can use to check your models and validate that an attribute value is not empty, is unique and not already in the database, follows a specific format and many more."
+17,What does using bang on a method do?,It raises the actual validation failure instead of just returning false.
+18,What is a migration?,"They manage the db schema.
+
+
+
+Migrations are a convenient way to alter your database schema over time in a consistent and easy way. They use a Ruby DSL so that you don't have to write SQL by hand, allowing your schema and changes to be database independent.
+
+
+
+You can think of each migration as being a new 'version' of the database. A schema starts off with nothing in it, and each migration modifies it to add or remove tables, columns, or entries. Active Record knows how to update your schema along this timeline, bringing it from whatever point it is in the history to the latest version. Active Record will also update your db/schema.rbfile to match the up-to-date structure of your database."
+19,Syntax to create a join table via migration,"create_join_table :users, :orders
+
+
+
+creates the table: users_orders
+
+
+
+Can give it a different name using an optional argument:
+
+
+
+create_join_table :users, :order, table_name: :new_table
+
+
+
+Create_join_table also accepts a block which can be used to add indices"
+20,"How would you update a table, and what is the syntax?","change_table :products do |t|
+
+t.remove :description, :name
+
+t.string :part_number
+
+t.index :part_number
+
+t.rename :upccode, :upc_code
+
+end"
+21,How would you update a column and what is the syntax?,"change_column :table_name, :column_name"
+22,Syntax to add and remove a foreign key,"add_foreign_key orders users
+
+
+
+will add a new foreign key to the user_id column of the orders table
+
+
+
+remove_foreign_key
+
+
+
+# let Active Record figure out the column nameremove_foreign_key :accounts, :branches
+
+
+
+# remove foreign key for a specific columnremove_foreign_key :accounts, column: :owner_id
+
+
+
+# remove foreign key by nameremove_foreign_key :accounts, name: :special_fk_name"
+23,What does running rake db:migrate do?,"Updates all the new migrates (if there are any)
+
+
+
+Invokes the db:schema:dump task, which updates the db/schema.rb file to match the structure of the db"
+24,Syntax to migrate a specific version?,db:migrate VERSION=1010101
+25,"Syntax to rollback, and to rollback a specific amount of times?",db:rollback STEP=n
+26,Task to rollback and then re-migrate?,db:migrate:redo STEP=n
+27,What does the rake db:setup task do?,"Loads the schema
+
+
+
+Initializes it with the seed data"
+28,Which task will drop the db and set it up again?,"db:reset
+
+
+
+Functionally the same as db:drop db:setup
+
+
+
+This is not the same as running all the migrations. It will only use the contents of the current schema.rb file. If a migration can't be rolled back, rake db:reset may not help you. To find out more about dumping the schema see Schema Dumping and Yousection."
+29,Summarize what Model.find(options) does,"Converts the supplied options to an equivalent SQL query
+
+
+
+Fires the SQL query and retrieves the corresponding results from the DB
+
+
+
+Instantiates the equivalent Ruby object to the appropriate model for every resulting row.
+
+
+
+Run after_find and then after_initialize callbacks, if any"
+30,What does find do?,retrieves object corresponding to the specified primary key
+31,How to query for multiple objects at once?,"Model.find([1,10,23])
+
+
+
+using an array of primary keys
+
+
+
+Will throw an error unless a matching record is found for every supplied key"
+32,How to query n-records?,"Model.take(n)
+
+
+
+or
+
+
+
+Model.first(n)"
+33,How does the first method works?,Finds the first record ordered by primary key
+34,How would you find a record using a first name?,"Model.find_by first_name: 'tim'
+
+
+
+or
+
+
+
+Model.where(first_name: 'tim')"
+35,What are the two most efficient ways to retrieve multiple objects at once? How many records is a good rule of thumb to begin using these on?,"Model.find_each
+
+
+
+Model.find_in_batches
+
+
+
+Model.find is good enough for <1,000 records. But use the two batch methods when querying more than that."
+36,Optimal query syntax for a conditional search?,"Model.where(""first_name = ?"", params[:people])
+
+
+
+Putting the variable directly into the conditions string will pass the variable to the database as-is. This means that it will be an unescaped variable directly from a user who may have malicious intent. If you do this, you put your entire database at risk because once a user finds out they can exploit your database they can do just about anything to it. Never ever put your arguments directly inside the conditions string."
+37,Syntax to query two conditionals?,"Model.where(""orders_count = ? AND locked = ?"", params[:orders], false)"
+38,ORM,The idea behind most Ruby ORMs is that your model classes inherit from a base class that implements the general functionality to interact with the database and any model-specific code lives in the model (child) class. This can be tricky because the parent class doesn't know beforehand anything about the structure of your database. How is it supposed to know that the class Studentcorresponds to the table students?
+39,What does the .all method return?,"An ActiveRecord Relation object.
+
+
+
+It's like an array"
+40,What does the .where method return?,Returns an AR Relation of all the matching objects.
+41,What can you pass the .where method?,"You can pass it a hash:
+
+
+
+Dog.where(age: 1)
+
+
+
+Or you can pass it a string literal like SQL:
+
+
+
+Dog.where(""age = ? and name like ?"", 1, '%Fi%')"
+42,Popular AR queries/methods to retrieve records?,".all
+
+.where
+
+.order
+
+.limit
+
+.pluck
+
+.first
+
+.find"
+43,Which method to tell us how many records are in the table?,.count
+44,Which method to search by primary key?,.find
+45,Which method to retrieve the values of specific fields?,.pluck
+46,"How would you retrieve the first dog who's one years old, and ordered alphabetically?",Dog.order(name: :asc).where(age: 1).limit(1)
+47,"How would you search for a specific field, and if it didn't exist, instantiate it all at once (without saving)?",.find_or_initialize_by
+48,"How would you search for a specific field, and if it didn't exist, instantiate it all at once (with saving)?",.find_or_create_by
+49,"From the console, how to list all the attribute names and types associated with a class?","Just type the class name:
+
+
+
+Dog
+
+
+
+Person
+
+
+
+etc"
+50,Explain AR's getter and setter methods,"You can save an object like so:
+
+
+
+fig = Dog.find_by(name: 'Fig')
+
+
+
+then you have getter methods like:
+
+
+
+fig.name
+
+#>Fig
+
+
+
+and setter methods like:
+
+
+
+fig.age = 8"
+51,Do AR's getter and setter methods save?,"No. Must save after.
+
+
+
+Do you need to update Updated and Created at when doing this?
+
+
+
+No. Because it already has an ID, it knows to increment the fields."
+52,"How can you update and save multiple attributes at once?
+
+
+
+Do you do this on the Model or on the instance?","instance.update_attributes(name: 'tim', age: '31)"
+53,Delete vs Destroy,"Delete first cpnsiders validations and ch
+
+
+
+Destroy just immediately destroys it."
+54,What does REST stand for,"Representational State Transfer
+
+
+
+The message being sent is changed based on the state.
+
+
+
+URL (github.com): the message
+
+HTTP verb (get/post): the state
+
+
+
+GET:/products (get me the products)
+
+POST:/products (create a new product)"
+55,What are the HTTP analogs for C.R.U.D.?,"Create -> Put
+
+Read -> Get
+
+Update -> Put
+
+Delete -> Destroy"

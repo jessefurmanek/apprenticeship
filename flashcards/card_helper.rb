@@ -43,6 +43,33 @@ def select_a_card(user,deck_index,database,action)
 end
 
 def show_front(user,deck_index,database,card)
-  puts database["user_decks"]["VINNY'S_TEST_DECK_VINCENT"]
-  # puts database["user_decks"][get_deck_name(user,deck_index,database)]['cards'][card]
+  puts database["user_decks"][get_deck_name(user,deck_index,database)]["cards"][card]["front"]
+end
+
+def show_back(user,deck_index,database,card)
+  puts database["user_decks"][get_deck_name(user,deck_index,database)]["cards"][card]["back"]
+end
+
+def update_card_correct(user, deck_index, database, card)
+  new_interval = database["user_decks"][get_deck_name(user, deck_index, database)] \
+  ["cards"][card]["current_interval"].to_i*2
+
+  database["user_decks"][get_deck_name(user, deck_index, database)]\
+  ["cards"][card]["current_interval"] = new_interval
+
+  database["user_decks"][get_deck_name(user, deck_index, database)]\
+  ["cards"][card]["last_review"] = Time.now
+  update_database(database)
+end
+
+def update_card_incorrect(user, deck_index, database, card)
+  new_interval = database["user_decks"][get_deck_name(user, deck_index, database)] \
+  ["cards"][card]["current_interval"].to_i*0.5
+
+  database["user_decks"][get_deck_name(user, deck_index, database)]\
+  ["cards"][card]["current_interval"] = new_interval
+
+  database["user_decks"][get_deck_name(user, deck_index, database)]\
+  ["cards"][card]["last_review"] = Time.now
+  update_database(database)
 end
