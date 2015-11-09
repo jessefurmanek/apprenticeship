@@ -26,8 +26,8 @@ def create_deck(user, database)
     print "M/U?"
     answer = gets.chomp
     database["users"][user]["deck_names"]<<deck['json_index']
+    update_database(database)
     deck_index = database["users"][user]["deck_names"].length-1
-    puts database
     if ["M", "MANUALLY"].include?(answer.upcase)
       database["user_decks"][deck["json_index"]] = deck
       update_database(database)
